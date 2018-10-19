@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
@@ -32,8 +33,8 @@ namespace baseurl.Areas.HelpPage.Controllers
             var baseurl= Request.Url.GetLeftPart(UriPartial.Authority);
             var baseurl2 = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
             var baseurl3 = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
-            var baseurl4 = Url.Content("~");
-            var baseurl5 = new Uri(Request.Url, Url.HttpRouteUrl("DefaultApi", "")).AbsoluteUri.ToString(); 
+            var baseurl4 = System.Web.HttpContext.Current.Request.Url.Authority;
+            var baseurl5 = HttpContext.Request.Url.GetLeftPart(UriPartial.Query);
 
             ViewBag.BaseUrl = baseurl;//OK
             ViewBag.BaseUrl2 = baseurl2;//OK
